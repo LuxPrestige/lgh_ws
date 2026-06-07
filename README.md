@@ -105,6 +105,16 @@ ament_flake8 src/lux/lux/               # 린팅
 
 ## Git 작업 워크플로
 
+### GitHub에 업로드 (기본 3단계)
+
+```bash
+git add -A                  # 변경된 모든 파일 스테이징
+git commit -m "커밋 메시지"   # 커밋 생성
+git push origin main        # GitHub(main 브랜치)로 업로드
+```
+
+### 새 작업 브랜치로 작업하기
+
 ```bash
 # 최신 변경 가져오기
 git pull origin main
@@ -119,6 +129,18 @@ git commit -m "설명 메시지"
 # 원격에 푸시
 git push -u origin feature/<브랜치명>
 ```
+
+### 자주 쓰는 명령어
+
+| 명령어 | 설명 |
+|---|---|
+| `git status` | 변경된 파일 확인 |
+| `git diff` | 변경 내용 상세 확인 |
+| `git add <파일>` / `git add -A` | 스테이징 (특정 파일 / 전체) |
+| `git commit -m "메시지"` | 커밋 생성 |
+| `git push origin main` | `main` 브랜치를 GitHub에 업로드 |
+| `git pull origin main` | GitHub의 최신 변경 가져오기 |
+| `git log --oneline -5` | 최근 커밋 5개 확인 |
 
 기본 원격 저장소: `git@github.com:LuxPrestige/lgh_ws.git`
 
