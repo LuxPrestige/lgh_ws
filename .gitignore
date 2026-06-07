@@ -24,5 +24,10 @@ src/lux/policies/*.pt
 *.swp
 *.swo
 
+# AI/agent tool local config
+.claude/
+.agents/
+.codex
+
 # Runtime logs
 *.log
