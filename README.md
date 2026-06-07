@@ -1,6 +1,6 @@
-# lgh_ws — quattro팀 4족 보행 로봇 ROS 2 워크스페이스
+# quattro팀 4족 보행 로봇 ROS 2 워크스페이스
 
-2026년 캡스톤디자인II quattro팀 ROS 2 워크스페이스입니다. 
+2026년 캡스톤디자인II quattro팀 워크스페이스입니다. 
 
 기구학, Bezier 보행 생성, 상태 머신, 모터 제어(CAN, PWM), 센서(IMU), 텔레오퍼레이션, RViz2 시각화
 
