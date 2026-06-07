@@ -67,7 +67,7 @@ def generate_launch_description():
                     'calib_yaml': gim_calib,
                     'can_interface': 'can0',
                     'bitrate': 500000,
-                    'mit_kp': 40.0,
+                    'mit_kp': 60.0,
                     'mit_kd': 1.0,
                     'current_lim': 20.0,
                     'tx_rate_hz': 100.0,
@@ -76,7 +76,7 @@ def generate_launch_description():
                     'cmd_timeout_sec': 0.3,
                     'center_on_start': False,
                     'offset_on_start': False,
-                    'direct_after_startup': True,
+                    'direct_after_startup': False,
                 }
             ]
         ),

@@ -549,7 +549,7 @@ class MITPub(Node):
 
     def _set_run_velocity_by_movement(self, movement: str):
         is_stepping = (movement == 'Stepping')
-        new_vel = 4.0 if is_stepping else 0.5
+        new_vel = 6.0 if is_stepping else 1.0
         if math.isclose(self.target_run_vel, new_vel, abs_tol=1e-9):
             return
         self.target_run_vel = new_vel
@@ -640,7 +640,7 @@ class MITPub(Node):
         if dt > 0.1:
             dt = self.tx_period
 
-        if self.direct_after_startup and not self.startup_mode:
+        if self.direct_after_startup and not self.startup_mode and self.current_movement != 'Viewing':
             if not self.direct_mode_logged:
                 self.get_logger().info(
                     'RL direct 송신 모드 진입: rate-limit 없이 target_setpoint_rad를 MIT 목표로 전송'
@@ -661,9 +661,15 @@ class MITPub(Node):
             self.startup_mode       = False
 
         max_step = self.max_velocity_rad_s * dt
+        is_viewing = (self.current_movement == 'Viewing')
 
         for ch in self.channels:
-            step     = max(-max_step, min(max_step, diffs[ch]))
+            if is_viewing and max_diff > 1e-4:
+                # View 모드: 모든 관절이 동시에 목표 도달 — 가장 먼 관절 속도 기준 비례 조절
+                sync_step = max_step * (abs(diffs[ch]) / max_diff)
+                step = math.copysign(min(sync_step, abs(diffs[ch])), diffs[ch])
+            else:
+                step = max(-max_step, min(max_step, diffs[ch]))
             next_rad = self.internal_setpoint[ch] + step
             self.internal_setpoint[ch] = next_rad
             self.send_mit_packet(ch, next_rad, 0.0, self.kp, self.kd, self.torque_ff_nm[ch])

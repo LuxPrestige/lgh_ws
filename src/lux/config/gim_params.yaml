@@ -17,7 +17,7 @@
 
     # ADJUSTABLE
     dt: 0.01
-    Tswing: 0.5
+    Tswing: 0.25
     SwingPeriod_LIMITS: [0.1, 0.3]
     BaseStepVelocity: 0.001
     BaseClearanceHeight: 0.04

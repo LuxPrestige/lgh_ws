@@ -17,8 +17,6 @@ setup(
         ('share/' + package_name + '/launch', glob('launch/*.py')),
         # 설정 파일(YAML) 설치 경로 설정
         ('share/' + package_name + '/config', glob('config/*.yaml')),
-        # RL 정책 파일 설치 경로 설정
-        ('share/' + package_name + '/policies', glob('policies/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -43,8 +41,6 @@ setup(
             'keyboard_teleop_py = lux.keyboard_teleop:main',
             'keyboard_teleop_gim_py = lux.keyboard_teleop_gim:main',
             'keyboard_teleop_spot_py = lux.keyboard_teleop_spot:main',
-            'keyboard_teleop_rl_py = lux.keyboard_teleop_rl:main',
-            'lux_rl_interface = lux.lux_rl_interface:main',
         ],
     },
 )

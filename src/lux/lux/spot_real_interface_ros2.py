@@ -110,14 +110,7 @@ class SpotCommander(Node):
         self.PenetrationDepth = copy.deepcopy(self.BasePenetrationDepth)
 
         self.last_time = self.get_clock().now().nanoseconds / 1e9
-
-        # 조이스틱 해제 시 발 튀는 현상 방지용 EMA 스무딩 상태
-        self.smooth_L       = 0.0
-        self.smooth_lateral = 0.0
-        self.smooth_yaw     = 0.0
-        # EMA 시정수(초) — 작을수록 응답이 빠르고, 클수록 부드럽게 감속
-        self.smooth_tau     = 0.15
-
+        
         self.contacts = [0, 0, 0, 0]
         self.imu = [0.0]*8
         self.enable_contact = False
@@ -388,21 +381,11 @@ class SpotCommander(Node):
         self.PenetrationDepth = np.clip(self.PenetrationDepth, self.PenetrationDepth_LIMITS[0], self.PenetrationDepth_LIMITS[1])
 
         # 3. Trajectory 생성
-        # EMA 스무딩: 조이스틱을 갑자기 놓을 때 StepLength 등이 순간적으로 0이 되면
-        # 베지에 내부 타이머가 즉시 리셋되어 발이 확 튀는 현상 방지
-        if dt > 0:
-            alpha = 1.0 - np.exp(-dt / self.smooth_tau)
-        else:
-            alpha = 1.0
-        self.smooth_L       += alpha * (StepLength       - self.smooth_L)
-        self.smooth_lateral += alpha * (LateralFraction  - self.smooth_lateral)
-        self.smooth_yaw     += alpha * (YawRate          - self.smooth_yaw)
-
         # 보폭이 줄어들 때 발 높이도 비례해서 낮춰 감속 중 스윙 발이 지면에 탁 닿는 현상 방지
         # threshold: STEPLENGTH_SCALE * 0.2 이상에서 full clearance
-        _step_ratio = min(1.0, abs(self.smooth_L) / max(self.STEPLENGTH_SCALE * 0.2, 1e-6))
+        _step_ratio = min(1.0, abs(StepLength) / max(self.STEPLENGTH_SCALE * 0.2, 1e-6))
         self.T_bf = self.bzg.GenerateTrajectory(
-            self.smooth_L, self.smooth_lateral, self.smooth_yaw, self.StepVelocity,
+            StepLength, LateralFraction, YawRate, self.StepVelocity,
             self.T_bf0, self.T_bf,
             self.ClearanceHeight * _step_ratio, self.PenetrationDepth,
             self.contacts, dt

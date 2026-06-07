@@ -146,7 +146,11 @@ class SpotStateMachine(Node):
             mini_cmd.z             = cmd.z
             mini_cmd.faster        = cmd.faster
             mini_cmd.slower        = cmd.slower
-            mini_cmd.motion        = "Stop" if near_zero else "Go"
+            if cmd.movement == "Viewing":
+                # Viewing 모드: roll/pitch/yaw/z 기반이므로 spot.py의 판정 사용
+                mini_cmd.motion = cmd.motion
+            else:
+                mini_cmd.motion = "Stop" if near_zero else "Go"
             mini_cmd.movement      = cmd.movement
             mini_cmd.imu_auto_pose = cmd.imu_auto_pose
 
