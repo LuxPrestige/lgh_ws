@@ -14,9 +14,6 @@ venv/
 src/lux/config/spot_servo_calib.yaml
 src/lux/config/gim_servo_calib.yaml
 
-# RL policy weights (large binaries)
-src/lux/policies/*.pt
-
 # Editor/local files
 .DS_Store
 .idea/

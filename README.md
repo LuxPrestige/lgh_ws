@@ -123,8 +123,6 @@ git push -u origin feature/<브랜치명>
 
 ## 참고
 
-- RL 정책(`torch`)은 무거운 의존성이라 `requirements.txt`에 주석 처리되어 있습니다.
-  필요 시 <https://pytorch.org/get-started/locally/> 에서 플랫폼에 맞게 설치하세요.
-- 기계별 캘리브레이션 파일(`*_servo_calib.yaml`)과 RL 정책 가중치(`*.pt`)는
-  `.gitignore`에 의해 버전 관리에서 제외됩니다.
+- 기계별 캘리브레이션 파일(`*_servo_calib.yaml`)은 `.gitignore`에 의해 버전 관리에서
+  제외됩니다. 설치 시 `*.example` 템플릿에서 자동 복사됩니다.
 - 아키텍처 및 노드/토픽 상세는 `CLAUDE.md`를 참고하세요.
