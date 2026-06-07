@@ -1,0 +1,7 @@
+/**:
+  ros__parameters:
+    calibration:
+      # GIM6010-8 Direction (1: 정방향, -1: 역방향)
+      direction: [-1, -1, -1, -1, 1, 1, 1, -1, -1, 1, 1, 1]
+      # Offset (degrees) — motor_calibrator로 측정 후 입력 (기본값 0으로 시작)
+      offset_deg: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]

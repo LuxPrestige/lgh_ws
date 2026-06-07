@@ -1,0 +1,8 @@
+numpy
+pygame
+python-can
+pyyaml
+adafruit-circuitpython-bno08x
+
+# RL interface (무거운 패키지, 필요 시 주석 해제)
+# torch  # https://pytorch.org/get-started/locally/ 에서 플랫폼에 맞게 설치

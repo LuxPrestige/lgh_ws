@@ -1,0 +1,28 @@
+# ROS2 workspace artifacts
+build/
+install/
+log/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+venv/
+.venv/
+
+# Calibration overrides (machine-specific)
+src/lux/config/spot_servo_calib.yaml
+src/lux/config/gim_servo_calib.yaml
+
+# RL policy weights (large binaries)
+src/lux/policies/*.pt
+
+# Editor/local files
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Runtime logs
+*.log
